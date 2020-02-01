@@ -12,3 +12,4 @@ try {
 
 module.exports.Admin = require("./admin");
 module.exports.Article = require("./article");
+module.exports.Avis = require("./avis");

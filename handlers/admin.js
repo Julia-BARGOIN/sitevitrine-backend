@@ -17,25 +17,40 @@ exports.createAdmin = async function(req, res) {
   }
 };
 
-exports.showAdmin = async function(req, res) {
+exports.showAdmins = async function(req, res) {
   try {
-    let admin = await db.Admin.findById("5e0b223c1b3d7c046eaa04d3");
+    let admins = await db.Admin.find();
+    return res.status(200).json(admins);
+  } catch (error) {
+    console.log("error showAdmins", error);
+  }
+};
+exports.showOneAdmin = async function(req, res) {
+  try {
+    let admin = await db.Admin.findById(req.params.id);
     return res.status(200).json(admin);
   } catch (error) {
-    console.log("error showAdmin", error);
+    console.log("error admin", error);
   }
 };
 
-exports.deleteAdmin = async function(req, res) {
+exports.deleteOneAdmin = async function(req, res) {
   try {
-    let deleteAdmin = await db.Admin.deleteMany();
+    let deletedAdmin = await db.Admin.deleteOne({ id: req.params.id });
+    return res.status(200).json({
+      message: "Admin supprimé avec succès",
+      admin: deletedAdmin
+    });
+  } catch (error) {
+    console.log("error deleteOneAdmin", error);
+  }
+};
+
+exports.updateManyAdmin = async function(res, req) {
+  try {
+    let updateManyAdmin = await db.Admin.updateMany();
+    return res.status(200).json(updateManyAdmin);
   } catch (error) {
     console.log("error deleteAdmin", error);
   }
 };
-
-// créer un delete pour un admin précis
-// faire un update pour modifier ces données
-
-// faire model de l'avis et le blog faire route et handlers
-// create article du blog fait et tester
