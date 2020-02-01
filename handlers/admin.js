@@ -1,10 +1,8 @@
-const db = require("../models");
+const db = require("../models/admin");
 
 exports.createAdmin = async function(req, res) {
   try {
     let newAdmin = await db.Admin.create({
-      firstname: req.body.firstname,
-      lastname: req.body.lastname,
       email: req.body.email,
       password: req.body.password
     });

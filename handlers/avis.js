@@ -1,4 +1,4 @@
-const db = require("../avis");
+const db = require("../models/avis");
 
 exports.createAvis = async function(req, res) {
   try {

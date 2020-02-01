@@ -1,4 +1,4 @@
-const db = require("../models");
+const db = require("../models/article");
 
 exports.createArticle = async function(req, res) {
   try {

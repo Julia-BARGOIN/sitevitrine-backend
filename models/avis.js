@@ -14,10 +14,10 @@ const avisSchema = new mongoose.Schema({
     required: true
   },
   date: {
-    type: String,
+    type: Date,
     required: true
   }
 });
 
-const Avis = mongoose.model("Admin", adminSchema);
+const Avis = mongoose.model("Admin", avisSchema);
 module.exports = Avis;
