@@ -1,4 +1,4 @@
-const db = require("../models/admin");
+const db = require("../models");
 
 exports.createAdmin = async function(req, res) {
   try {
@@ -34,7 +34,7 @@ exports.showOneAdmin = async function(req, res) {
 
 exports.deleteOneAdmin = async function(req, res) {
   try {
-    let deletedAdmin = await db.Admin.deleteOne({ id: req.params.id });
+    let deletedAdmin = await db.Admin.deleteOne({ _id: req.params.id });
     return res.status(200).json({
       message: "Admin supprimé avec succès",
       admin: deletedAdmin

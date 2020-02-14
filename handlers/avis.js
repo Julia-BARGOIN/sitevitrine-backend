@@ -1,18 +1,17 @@
-const db = require("../models/avis");
+const db = require("../models");
 
 exports.createAvis = async function(req, res) {
   try {
     let newAvis = await db.Avis.create({
       firstname: req.body.firstname,
       lastname: req.body.lastname,
-      text: req.body.text,
-      date: req.body.date
+      text: req.body.text
     });
     return res.status(200).json({
       message: "New avis created successfully",
       newAvis
     });
-  } catch (errror) {
+  } catch (error) {
     console.log("error avis", error);
   }
 };

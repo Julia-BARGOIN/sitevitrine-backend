@@ -1,4 +1,4 @@
-const db = require("../models/article");
+const db = require("../models");
 
 exports.createArticle = async function(req, res) {
   try {
@@ -30,7 +30,7 @@ exports.showOneArticle = async function(req, res) {
     let article = await db.Article.findById(req.params.id);
     return res.status(200).json(article);
   } catch (error) {
-    console.log("error showOneArticle", error);
+    console.log("error article", error);
   }
 };
 
