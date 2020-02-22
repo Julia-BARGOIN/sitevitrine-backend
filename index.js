@@ -22,6 +22,12 @@ const {
   showOneAvis,
   deleteOneAvis
 } = require("./handlers/avis");
+const {
+  createPatient,
+  showPatient,
+  showOnePatient,
+  deleteOnePatient
+} = require("./handlers/patient");
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -33,23 +39,25 @@ app.get("/", function(req, res) {
 
 app.post("/oauth", login);
 
-app.post("/admin", createAdmin);
-app.get("/admin", showAdmins);
+app.post("/admin/create", createAdmin);
+app.get("/admin/show", showAdmins);
 app.get("/admin/:id", showOneAdmin);
 app.delete("/admin/:id", deleteOneAdmin);
 
-app.post("/article", createArticle);
-app.get("/article", showArticles);
+app.post("/article/create", createArticle);
+app.post("/articles/show", showArticles);
 app.get("/article/:id", showOneArticle); // para dynamique
 app.delete("/article/:id", deleteOneArticle);
 
-app.post("/avis", createAvis);
-app.get("/avis", showAvis);
+app.post("/avis/create", createAvis);
+app.get("/avis/show", showAvis);
 app.get("/avis/:id", showOneAvis);
 app.delete("/avis/:id", deleteOneAvis);
 
-// a faire
-// app.get("/authenfication");
+app.post("/patient/create", createPatient);
+app.get("/patient/show", showPatient);
+app.get("/patient/:id", showOnePatient);
+app.delete("/patient/:id", deleteOnePatient);
 
 app.listen(8081, function() {
   console.log("back-end running on port 8081");

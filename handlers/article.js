@@ -9,7 +9,7 @@ exports.createArticle = async function(req, res) {
       date: req.body.date
     });
     return res.status(200).json({
-      message: "New article create successfulle",
+      message: "New article create successful",
       newArticle
     });
   } catch (error) {
@@ -19,12 +19,22 @@ exports.createArticle = async function(req, res) {
 
 exports.showArticles = async function(req, res) {
   try {
-    let articles = await db.Article.find();
+    let articles = await db.Article.aggregate([
+      {
+        $sort: {
+          date: -1
+        }
+      },
+      {
+        $limit: req.body.limit || 10
+      }
+    ]);
     return res.status(200).json(articles);
   } catch (error) {
     console.log("error showArticles", error);
   }
 };
+
 exports.showOneArticle = async function(req, res) {
   try {
     let article = await db.Article.findById(req.params.id);

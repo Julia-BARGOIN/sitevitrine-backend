@@ -13,6 +13,10 @@ const articleSchema = new mongoose.Schema(
     author: {
       type: String,
       required: true
+    },
+    date: {
+      type: Date,
+      required: true
     }
   },
   {
