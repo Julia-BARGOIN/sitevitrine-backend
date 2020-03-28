@@ -14,7 +14,8 @@ const {
   createArticle,
   showArticles,
   showOneArticle,
-  deleteOneArticle
+  deleteOneArticle,
+  updateArticle
 } = require("./handlers/article");
 const {
   createAvis,
@@ -44,10 +45,11 @@ app.get("/admin/show", showAdmins);
 app.get("/admin/:id", showOneAdmin);
 app.delete("/admin/:id", deleteOneAdmin);
 
+app.delete("/article/delete/:id", deleteOneArticle);
 app.post("/article/create", createArticle);
 app.post("/articles/show", showArticles);
 app.get("/article/:id", showOneArticle); // para dynamique
-app.delete("/article/:id", deleteOneArticle);
+app.put("/article/update/:id", updateArticle);
 
 app.post("/avis/create", createAvis);
 app.get("/avis/show", showAvis);

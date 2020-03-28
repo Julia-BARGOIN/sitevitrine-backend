@@ -6,7 +6,7 @@ exports.createArticle = async function(req, res) {
       title: req.body.title,
       text: req.body.text,
       author: req.body.author,
-      date: req.body.date
+      date: new Date()
     });
     return res.status(200).json({
       message: "New article create successful",
@@ -56,11 +56,21 @@ exports.deleteOneArticle = async function(req, res) {
   }
 };
 
-exports.updateManyArticle = async function(res, req) {
+exports.updateArticle = async function(req, res) {
   try {
-    let updateManyArticle = await db.Article.updateMany();
-    return res.status(200).json(updateManyAdmin);
+    console.log(req.body);
+    const article = await db.Article.findByIdAndUpdate(
+      req.params.id,
+      {
+        title: req.body.title,
+        text: req.body.text,
+        author: req.body.author,
+        date: new Date()
+      },
+      { new: true }
+    );
+    return res.status(200).json(article);
   } catch (error) {
-    console.log("error updateManyArticle", error);
+    console.log("error updateArticle", error);
   }
 };
