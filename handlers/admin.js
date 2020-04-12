@@ -1,14 +1,25 @@
 const db = require("../models");
+const JWT = require("../jwt");
+const jwt = new JWT();
 
 exports.createAdmin = async function(req, res) {
   try {
-    let newAdmin = await db.Admin.create({
+    const newAdmin = await db.Admin.create({
       email: req.body.email,
       password: req.body.password
     });
+
+    const token = await jwt.saveToken(
+      admin._id,
+      jwt.JWTgenerator({
+        id: newAdmin._id,
+        email: newAdmin.email
+      }).signature
+    );
+
     return res.status(200).json({
-      message: "New admin created successfully",
-      newAdmin
+      newAdmin,
+      token
     });
   } catch (error) {
     console.log("error admin", error);

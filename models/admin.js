@@ -9,6 +9,11 @@ const adminSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true
+    },
+    token: {
+      signature: String,
+      created_at: Date,
+      expired_at: Date
     }
   },
   {

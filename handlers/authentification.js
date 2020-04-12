@@ -1,4 +1,5 @@
 const db = require("../models");
+const JWT = require("../jwt.js");
 
 exports.login = async function(req, res) {
   try {
@@ -9,24 +10,30 @@ exports.login = async function(req, res) {
     let code = 200;
 
     let login = await db.Admin.findOne(query)
-      .then(user => {
-        if (!user) {
+      .then(async admin => {
+        if (!admin) {
           code = 401;
           return {
             code: 401,
             message: "Unauthorized"
           };
         }
+
+        const jwt = new JWT();
+        const token = jwt.JWTgenerator({
+          id: admin._id,
+          email: admin.email
+        }).signature;
+        const result = await jwt.saveToken(admin._id, token);
         return {
-          code: 200,
-          message: "ok"
+          token: result.token.signature
         };
       })
       .catch(() => {
-        code = 401;
+        code = 500;
         return {
-          code: 401,
-          message: "Unauthorized"
+          code: 500,
+          message: "internal server error"
         };
       });
 

@@ -3,6 +3,9 @@ const app = express();
 const cors = require("cors");
 const bodyParser = require("body-parser");
 
+const JWT = require("./jwt");
+const jwt = new JWT();
+
 const { login } = require("./handlers/authentification");
 const {
   createAdmin,
@@ -40,26 +43,26 @@ app.get("/", function(req, res) {
 
 app.post("/oauth", login);
 
-app.post("/admin/create", createAdmin);
-app.get("/admin/show", showAdmins);
-app.get("/admin/:id", showOneAdmin);
-app.delete("/admin/:id", deleteOneAdmin);
+app.post("/admin/create", jwt.express(), createAdmin);
+app.get("/admin/show", jwt.express(), showAdmins);
+app.get("/admin/:id", jwt.express(), showOneAdmin);
+app.delete("/admin/:id", jwt.express(), deleteOneAdmin);
 
-app.delete("/article/delete/:id", deleteOneArticle);
-app.post("/article/create", createArticle);
-app.post("/articles/show", showArticles);
-app.get("/article/:id", showOneArticle); // para dynamique
-app.put("/article/update/:id", updateArticle);
+app.delete("/article/delete/:id", jwt.express(), deleteOneArticle);
+app.post("/article/create", jwt.express(), createArticle);
+app.post("/articles/show", jwt.express(), showArticles);
+app.get("/article/:id", jwt.express(), showOneArticle); // para dynamique
+app.put("/article/update/:id", jwt.express(), updateArticle);
 
-app.post("/avis/create", createAvis);
-app.get("/avis/show", showAvis);
-app.get("/avis/:id", showOneAvis);
-app.delete("/avis/:id", deleteOneAvis);
+app.post("/avis/create", jwt.express(), createAvis);
+app.get("/avis/show", jwt.express(), showAvis);
+app.get("/avis/:id", jwt.express(), showOneAvis);
+app.delete("/avis/:id", jwt.express(), deleteOneAvis);
 
-app.post("/patient/create", createPatient);
-app.get("/patient/show", showPatient);
-app.get("/patient/:id", showOnePatient);
-app.delete("/patient/:id", deleteOnePatient);
+app.post("/patient/create", jwt.express(), createPatient);
+app.get("/patient/show", jwt.express(), showPatient);
+app.get("/patient/:id", jwt.express(), showOnePatient);
+app.delete("/patient/:id", jwt.express(), deleteOnePatient);
 
 app.listen(8081, function() {
   console.log("back-end running on port 8081");
