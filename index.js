@@ -51,7 +51,7 @@ app.delete("/admin/:id", jwt.express(), deleteOneAdmin);
 app.delete("/article/delete/:id", jwt.express(), deleteOneArticle);
 app.post("/article/create", jwt.express(), createArticle);
 app.post("/articles/show", showArticles);
-app.get("/article/:id", jwt.express(), showOneArticle); // para dynamique
+app.get("/article/:id", showOneArticle); // para dynamique
 app.put("/article/update/:id", jwt.express(), updateArticle);
 
 app.post("/avis/create", jwt.express(), createAvis);
