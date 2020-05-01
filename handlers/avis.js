@@ -5,7 +5,9 @@ exports.createAvis = async function(req, res) {
     let newAvis = await db.Avis.create({
       firstname: req.body.firstname,
       lastname: req.body.lastname,
-      text: req.body.text
+      text: req.body.text,
+      date: Date.now(),
+      score: req.body.score
     });
     return res.status(200).json({
       message: "New avis created successfully",
@@ -18,7 +20,16 @@ exports.createAvis = async function(req, res) {
 
 exports.showAvis = async function(req, res) {
   try {
-    let avis = await db.Avis.find();
+    let avis = await db.Avis.aggregate([
+      {
+        $sort: {
+          date: -1
+        }
+      },
+      {
+        $limit: req.body.limit || 1
+      }
+    ]);
     return res.status(200).json(avis);
   } catch (error) {
     console.log("error showAvis", error);

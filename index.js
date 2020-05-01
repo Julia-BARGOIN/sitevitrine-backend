@@ -54,9 +54,9 @@ app.post("/articles/show", showArticles);
 app.get("/article/:id", showOneArticle); // para dynamique
 app.put("/article/update/:id", jwt.express(), updateArticle);
 
-app.post("/avis/create", jwt.express(), createAvis);
-app.get("/avis/show", jwt.express(), showAvis);
-app.get("/avis/:id", jwt.express(), showOneAvis);
+app.post("/avis/create", createAvis);
+app.post("/avis/show", showAvis);
+app.get("/avis/:id", showOneAvis);
 app.delete("/avis/:id", jwt.express(), deleteOneAvis);
 
 app.post("/patient/create", jwt.express(), createPatient);
